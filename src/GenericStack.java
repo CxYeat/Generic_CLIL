@@ -17,7 +17,7 @@ public class GenericStack<T> {
      *
      * @param size the maximum size of the stack
      */
-    private GenericStack(int size) {
+    public GenericStack(int size) {
         if(size <= 0) throw new IllegalArgumentException("Stack size must be greater than 0");
         stack = (T[]) new Object[size];
         top = - 1;
@@ -27,7 +27,7 @@ public class GenericStack<T> {
     /**
      * Default constructor that initializes an empty stack.
      */
-    private GenericStack() {
+    public GenericStack() {
         this(10);
     }
 
@@ -79,5 +79,29 @@ public class GenericStack<T> {
             return null;  // Return null if the stack is empty
         }
         return stack[top];  // Return the top element without removing it
+    }
+
+    /**
+     * Checks if the stack is empty.
+     *
+     * This method checks if there are any elements in the stack. It returns true if the stack is empty,
+     * otherwise false.
+     *
+     * @return true if the stack is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return top == -1;  // Return true if top is -1, meaning the stack is empty
+    }
+
+    /**
+     * Checks if the stack is full.
+     *
+     * This method checks if the stack has reached its maximum capacity. It returns true if the stack is full,
+     * otherwise false.
+     *
+     * @return true if the stack is full, false otherwise
+     */
+    public boolean isFull() {
+        return top == maxSize - 1;  // Return true if top is at the last index of the stack array
     }
 }
