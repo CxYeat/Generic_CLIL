@@ -12,45 +12,44 @@ public class Test {
      *
      * @param args command-line arguments (not used)
      */
-    public static void main(String[] args) {
-        // Creating a stack of Integer type with a maximum size of 3
-        GenericStack<Integer> stack = new GenericStack<>(3);
 
-        // Test 1: Push elements onto the stack
-        System.out.println("Pushing 10, 20, and 30 onto the stack.");
+    public static void main(String[] args) {
+        // Test push and pop
+        GenericStack<Integer> stack = new GenericStack<>(5);
         stack.push(10);
         stack.push(20);
-        stack.push(30);
-
-        // Test 2: Peek at the top element (should return 30)
-        System.out.println("Top element (peek): " + stack.peek()); // Expected output: 30
-
-        // Test 3: Pop an element from the stack (should return 30)
-        System.out.println("Popped element: " + stack.pop()); // Expected output: 30
-
-        // Test 4: Peek again after popping (should return 20)
-        System.out.println("Top element (peek after pop): " + stack.peek()); // Expected output: 20
-
-        // Test 5: Push more elements to test stack overflow
-        System.out.println("Pushing 40 onto the stack.");
-        stack.push(40); // Expected to work
-
-        // Test 6: Trying to push another element should throw an exception because the stack is full
+        System.out.println(stack.pop()); // Expected: 20
+        System.out.println(stack.pop()); // Expected: 10
+        System.out.println(stack.pop()); // Expected: null (empty stack)
+        // Test peek
+        GenericStack<String> stringStack = new GenericStack<>(3);
+        System.out.println(stringStack.peek()); // Expected: null (empty stack)
+        stringStack.push("Hello");
+        stringStack.push("World");
+        System.out.println(stringStack.peek()); // Expected: "World"
+        System.out.println(stringStack.pop()); // Expected: "World"
+        System.out.println(stringStack.peek()); // Expected: "Hello"
+        // Test isEmpty
+        GenericStack<Double> doubleStack = new GenericStack<>(2);
+        System.out.println(doubleStack.isEmpty()); // Expected: true
+        doubleStack.push(5.5);
+        System.out.println(doubleStack.isEmpty()); // Expected: false
+        doubleStack.pop();
+        System.out.println(doubleStack.isEmpty()); // Expected: true
+        // Test isFull
+        GenericStack<Character> charStack = new GenericStack<>(2);
+        System.out.println(charStack.isFull()); // Expected: false
+        charStack.push('A');
+        charStack.push('B');
+        System.out.println(charStack.isFull()); // Expected: true
+        // Test pushing onto a full stack
+        GenericStack<Integer> smallStack = new GenericStack<>(1);
+        smallStack.push(1);
         try {
-            System.out.println("Pushing 50 onto the stack.");
-            stack.push(50); // This should throw an IllegalStateException
+            smallStack.push(2);
         } catch (IllegalStateException e) {
-            System.out.println("Exception caught: " + e.getMessage());
+            System.out.println("Exception caught: " + e.getMessage()); // Expected exception
         }
-
-        // Test 7: Check if the stack is full
-        System.out.println("Is the stack full? " + stack.isFull()); // Expected output: true
-
-        // Test 8: Pop all elements from the stack
-        System.out.println("Popped element: " + stack.pop()); // Expected output: 20
-        System.out.println("Popped element: " + stack.pop()); // Expected output: 10
-
-        // Test 9: Check if the stack is empty after popping all elements
-        System.out.println("Is the stack empty? " + stack.isEmpty()); // Expected output: true
     }
 }
+
